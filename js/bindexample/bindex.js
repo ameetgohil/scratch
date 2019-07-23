@@ -14,7 +14,7 @@ class Consumer {
   }
 
   run() {
-    this.cb();
+    this.cb(565);
   }
 
 
@@ -27,7 +27,11 @@ let c = new Consumer({});
 
 
 
-let o = {name:'the object', fun:function() { console.log('my name is ' + this.name)}};
+let o = {name:'the object', fun:function(x) { 
+  console.log(x);
+  console.log(x + ' my name is ' + this.name)
+}
+};
 
 
 // c.setCb(()=>{
