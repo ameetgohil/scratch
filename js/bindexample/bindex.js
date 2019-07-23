@@ -17,6 +17,10 @@ class Consumer {
     this.cb(565);
   }
 
+  setInternal() {
+    // if this is defined at this line, any arrow function will use the same this
+    this.setCb( (x) => { console.log(x + ' internal: my name is ' + this.name); });
+  }
 
 }
 
@@ -27,7 +31,7 @@ let c = new Consumer({});
 
 
 
-let o = {name:'the object', fun:function(x) { 
+let o = {name:'the object', fun: (x) => { 
   console.log(x);
   console.log(x + ' my name is ' + this.name)
 }
@@ -39,7 +43,8 @@ let o = {name:'the object', fun:function(x) {
 // });
 
 // c.setCb(o.fun);
-c.setCb(o.fun.bind(o));
+c.cb = o.fun.bind(o);
+//c.setInternal();
 
 
 c.run();
